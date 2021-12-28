@@ -59,7 +59,7 @@ Func WatchDog()
 	  if (ProcessExists($ProcToCheck)) Then
 		 $hWnd = WinWait($WindowCLS, "", 10)
 	  Else
-		 Run($FileToRun)
+		 Run($FileToRun,@SW_MINIMIZE)
 	  EndIf
    EndIf
 EndFunc
