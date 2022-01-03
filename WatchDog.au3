@@ -6,6 +6,7 @@ Global $bWatch = True
 
 Local $sFilePath = "Settings.ini"
 Local $FileToRun = IniRead ($sFilePath, "Main", "AppToWatch", "Hook.exe" )
+Local $RunPath = IniRead ($sFilePath, "Main", "RunPath", "" )
 Local $ProcToCheck = IniRead ($sFilePath, "Main", "ProcToCheck", "Hook.exe" )
 Local $WindowCLS =  IniRead ($sFilePath, "Main", "WindowCLS", "[CLASS:ConsoleWindowClass]" )
 
@@ -45,6 +46,7 @@ While 1
    Case $msg = $iSettings
 	  If Not (FileExists ( $sFilePath )) Then
 		 IniWrite($sFilePath, "Main", "AppToWatch", "Hook.exe" )
+		 IniWrite($sFilePath, "Main", "RunPath", "" )
 		 IniWrite($sFilePath, "Main", "ProcToCheck", "Hook.exe" )
 		 IniWrite($sFilePath, "Main", "WindowCLS", "[CLASS:ConsoleWindowClass]")
 	  EndIf
@@ -59,7 +61,7 @@ Func WatchDog()
 	  if (ProcessExists($ProcToCheck)) Then
 		 $hWnd = WinWait($WindowCLS, "", 10)
 	  Else
-		 Run($FileToRun,"",@SW_MINIMIZE)
+		 Run($FileToRun,$RunPath,@SW_MINIMIZE)
 	  EndIf
    EndIf
 EndFunc
